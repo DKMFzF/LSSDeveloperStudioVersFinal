@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "345526486857",
+    "firebase_url": "https://lssdeveloperstudio-61a4d-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "lssdeveloperstudio-61a4d",
+    "storage_bucket": "lssdeveloperstudio-61a4d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:345526486857:android:f196af4268dd52ceedfc98",
+        "android_client_info": {
+          "package_name": "com.example.pidorasgames"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwObIUuw5_E0VoFujFaQxgTqubP4jhHiI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
