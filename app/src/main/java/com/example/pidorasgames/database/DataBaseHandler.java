@@ -4,16 +4,22 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DataBaseHendler extends SQLiteOpenHelper {
+// Класс для работы с BD
 
-    public DataBaseHendler(Context context) {
+public class DataBaseHandler extends SQLiteOpenHelper {
+    public DataBaseHandler(Context context) {
         super(context, Constant.DATABASE_NAME, null, Constant.DATABASE_VERSION);
     }
 
     // Мтеод для создания BD
     @Override
     public void onCreate(SQLiteDatabase db) {
-        
+        String CREATE_EMPLOYEE_TABLE = "CREATE TABLE " + Constant.DATABASE_NAME
+                + " (" + Constant.KEY_ID + " INTEGER PRIMARY KEY, "
+                + Constant.KEY_DISCIPLINE + " TEXT, "
+                + Constant.KEY_QUESTION + " TEXT" + " )"; // SQL запрос на создание таблицы
+
+        db.execSQL(CREATE_EMPLOYEE_TABLE); // Запрос в BD
     }
 
     // Метод для обновления BD
