@@ -1,4 +1,4 @@
-package com.example.pidorasgames;
+package com.example.pidorasgames.database;
 
 // Пользовательский класс
 

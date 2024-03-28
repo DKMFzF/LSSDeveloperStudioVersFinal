@@ -1,4 +1,4 @@
-package com.example.pidorasgames;
+package com.example.pidorasgames.basemain;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,13 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.pidorasgames.R;
+import com.example.pidorasgames.registration.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+// TODO: Создать Алгоритм тестов
+// TODO: Подвязать SQLite
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
