@@ -10,23 +10,49 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="250dp"
-        android:layout_marginBottom="250dp"
         android:gravity="center"
-        android:text="dsasa"
-        app:layout_constraintBottom_toTopOf="@+id/nextBut"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/nextBut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:onClick="onClickNext"
-        android:text="Следующий вопрос"
+        android:id="@+id/ans_but_4"
+        android:layout_width="190dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="108dp"
+        android:onClick="onClickAns"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/ans_but_1"
+        android:layout_width="190dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="208dp"
+        android:onClick="onClickAns"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/ans_but_2"
+        android:layout_width="190dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="208dp"
+        android:onClick="onClickAns"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/ans_but_3"
+        android:layout_width="190dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="108dp"
+        android:onClick="onClickAns"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

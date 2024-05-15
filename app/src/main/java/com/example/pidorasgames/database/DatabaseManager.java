@@ -4,13 +4,20 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteStatement;
+import android.text.TextUtils;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseManager {
     private DBHelper dbHelper;
+    public String[] categories;
     private SQLiteDatabase database;
+
+    private Cursor cursor;
+    private String query;
     public DatabaseManager(Context context) {
         dbHelper = new DBHelper(context);
     }
@@ -43,29 +50,43 @@ public class DatabaseManager {
      * Метод для получения данных из бд
      * return список из объектов QuestModel
       */
-    public List<QuestModel> getAllData() {
+    public List<QuestModel> getData(List<String> cats) {
         List<QuestModel> dataList = new ArrayList<>();
 
+        // SelectionArgs
+        categories = cats.toArray(new String[0]);
 
-        Cursor cursor = database.query(
-                Constant.TABLE_NAME,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-        );
+        int all_question = 3;
+        int cur_amount_question;
+        int amount_of_questions_one_cat = (int) Math.floor((double) all_question / cats.size());
 
-        if (cursor.moveToFirst()) {
-            do {
-                QuestModel data = new QuestModel(cursor.getString(0), cursor.getString(1), cursor.getString(2),
-                        cursor.getString(3), cursor.getString(4), cursor.getString(5),
-                        cursor.getString(6), cursor.getInt(7));
-                dataList.add(data);
-            } while (cursor.moveToNext());
+
+        for (int i = 0; i < categories.length; i++){
+            cur_amount_question = 0;
+             query = "SELECT * FROM " + Constant.TABLE_NAME + " WHERE " +
+                    Constant.COLUMN_DISCIPLINE + " = '" + categories[i] + "'";
+            cursor = database.rawQuery(query, null);
+            if (cursor != null) {
+                if (cursor.moveToFirst()) {
+                    do {
+
+                        QuestModel data = new QuestModel(cursor.getString(0), cursor.getString(1), cursor.getString(2),
+                                cursor.getString(3), cursor.getString(4), cursor.getString(5),
+                                cursor.getString(6), cursor.getInt(7));
+
+                        dataList.add(data);
+                        cur_amount_question++;
+                        if (cur_amount_question == amount_of_questions_one_cat && i != categories.length - 1) {
+                            break;
+                        } else if (i == categories.length - 1 &&
+                                cur_amount_question == all_question - (categories.length - 1) * amount_of_questions_one_cat) {
+                            break;
+                        }
+                    } while (cursor.moveToNext());
+                }
+                cursor.close();
+            }
         }
-        cursor.close();
         return dataList;
     }
 
@@ -73,5 +94,12 @@ public class DatabaseManager {
     public void deletOneRow(String row_id){
         long result = database.delete(Constant.TABLE_NAME, "id=?", new String[]{row_id});
     }
-    
+
+    public void updateID(String deletedID){
+        SQLiteStatement statement = database.compileStatement("UPDATE " + Constant.TABLE_NAME + " SET id = id - 1 WHERE id > ?");
+        statement.bindLong(1, Integer.parseInt(deletedID));
+        statement.execute();
+    }
+
+
 }

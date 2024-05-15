@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
 
         assert user != null;
-        String useName = "Вы вошли как -> " + user.getEmail();
+        String useName = "Вы вошли как -> " + user.getUid();
         openAcc.setText(useName);
     }
 

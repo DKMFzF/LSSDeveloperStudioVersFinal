@@ -3,6 +3,7 @@ package com.example.pidorasgames.registration;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,11 +16,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pidorasgames.basemain.MainActivity;
 import com.example.pidorasgames.R;
+import com.example.pidorasgames.basemain.Menu;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 // TODO: доделать регистрацию -> UI
 
@@ -30,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
 
     // Инстанция регистрации пользователя
     private FirebaseAuth mAuth;
+    private String userId;
+    private DatabaseReference currentUserRef;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Создание объекта проверки на авторизацию пользователя
         FirebaseUser cUser = mAuth.getCurrentUser();
+
 
         // Проверка
         if (cUser != null) {
@@ -95,7 +106,6 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),
                                         "Пользователь вошел в систему",
                                         Toast.LENGTH_SHORT).show(); // Отладка
-
                                 // Метод фиксирующий верификацию email
                                 exitShowAcc();
 
@@ -117,7 +127,7 @@ public class LoginActivity extends AppCompatActivity {
 
         assert user != null;
         if (user.isEmailVerified()) {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, Menu.class);
             startActivity(intent);
             finish();
 
