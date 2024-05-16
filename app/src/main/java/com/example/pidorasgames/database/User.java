@@ -15,4 +15,7 @@ public class User {
     }
 
     public User() {}
+    public int getReting(){
+        return reting;
+    }
 }

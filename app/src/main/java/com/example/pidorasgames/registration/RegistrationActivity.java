@@ -68,15 +68,16 @@ public class RegistrationActivity extends AppCompatActivity {
         listUser = new ArrayList<>();
 
         // Доступ к группе User
-        myDataBase = FirebaseDatabase.getInstance().getReference(USER_KEY);
         mAuth = FirebaseAuth.getInstance();
+
+
     }
 
     // Слушатель нажатий для кнопки "Создать пользователя"
     public void onClickSave(View view) {
 
         // Беру id из базы данных
-        String id = myDataBase.getKey();
+
 
         // введённые данные
         String name = registName.getText().toString();
@@ -111,10 +112,22 @@ public class RegistrationActivity extends AppCompatActivity {
                                                 idUser, Toast.LENGTH_SHORT).show(); // Отладка
 
                                         // Создание нового пользователя
+                                        myDataBase = FirebaseDatabase.getInstance().getReference(USER_KEY);
+                                        String uid = mAuth.getCurrentUser().getUid();
+                                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                        DatabaseReference userRef = database.getReference("User").child(uid);
+                                        String id = myDataBase.getKey();
                                         User user = new User(id, name, pass, email);
 
                                         // Пуш данных в DataBase
-                                        myDataBase.push().setValue(user);
+//                                        myDataBase.push().setValue(user);
+                                        userRef.setValue(user, (databaseError, databaseReference) -> {
+                                            if (databaseError != null) {
+                                                System.err.println("Ошибка при добавлении пользователя: " + databaseError.getMessage());
+                                            } else {
+                                                System.out.println("Пользователь успешно добавлен в базу данных с UID: " + uid);
+                                            }
+                                        });
                                     } else {
                                         Toast.makeText(getApplicationContext(),
                                                 "Введённые данные некорректны попробуйте ещё раз",
